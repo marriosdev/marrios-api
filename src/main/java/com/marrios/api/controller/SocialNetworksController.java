@@ -1,13 +1,12 @@
 package com.marrios.api.controller;
 
+import com.marrios.api.dto.socialnetwork.CreateSocialNetworkDto;
 import com.marrios.api.model.SocialNetwork;
 import com.marrios.api.service.SocialNetworkService;
+import jakarta.validation.Valid;
 import lombok.NoArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -27,7 +26,7 @@ public class SocialNetworksController {
     }
 
     @PostMapping
-    public ResponseEntity<List<SocialNetwork>> create() {
-        return ResponseEntity.ok(this.socialNetworkService.getAll());
+    public ResponseEntity<CreateSocialNetworkDto> create(@RequestBody @Valid CreateSocialNetworkDto createSocialNetworkDto) {
+        return ResponseEntity.ok(createSocialNetworkDto);
     }
 }
