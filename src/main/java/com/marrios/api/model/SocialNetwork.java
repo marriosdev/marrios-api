@@ -1,11 +1,13 @@
 package com.marrios.api.model;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.util.Objects;
 
 @Entity
 @Table(name="SOCIAL_NETWORKS")
+@Data
 public class SocialNetwork {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -17,30 +19,6 @@ public class SocialNetwork {
 
     @Column(nullable = false, name = "SOCIAL_NETWORK_NAME")
     private String socialNetworkName;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getLink() {
-        return link;
-    }
-
-    public void setLink(String link) {
-        this.link = link;
-    }
-
-    public String getSocialNetworkName() {
-        return socialNetworkName;
-    }
-
-    public void setSocialNetworkName(String socialNetworkName) {
-        this.socialNetworkName = socialNetworkName;
-    }
 
     @Override
     public boolean equals(Object o) {
