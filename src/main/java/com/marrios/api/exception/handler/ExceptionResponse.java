@@ -1,6 +1,7 @@
 package com.marrios.api.exception.handler;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import lombok.AllArgsConstructor;
@@ -13,14 +14,11 @@ import lombok.Setter;
 public class ExceptionResponse implements Serializable{
     private static final long serialVersionUID = 1L;
 
-    private @Getter @Setter Date timestamp;
+    private @Getter @Setter LocalDateTime timestamp;
 
     private @Getter @Setter String error;
 
     private @Getter @Setter Integer status;
 
     private @Getter @Setter String message;
-
-    private @Getter @Setter String path;
-
 }

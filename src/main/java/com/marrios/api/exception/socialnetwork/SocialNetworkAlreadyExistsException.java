@@ -8,7 +8,7 @@ public class SocialNetworkAlreadyExistsException extends RuntimeException {
 
     public SocialNetworkAlreadyExistsException(String name) {
         super(String.format("Rede social '%s' já existe", name));
-        this.status = HttpStatus.CONFLICT;
+        this.status = HttpStatus.BAD_REQUEST;
         this.errorCode = "SOCIAL_NETWORK_ALREADY_EXISTS";
     }
 
