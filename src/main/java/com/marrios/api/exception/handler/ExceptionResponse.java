@@ -3,6 +3,7 @@ package com.marrios.api.exception.handler;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,4 +22,6 @@ public class ExceptionResponse implements Serializable{
     private @Getter @Setter Integer status;
 
     private @Getter @Setter String message;
+
+    private @Getter @Setter List errors;
 }
