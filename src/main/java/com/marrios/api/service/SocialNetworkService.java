@@ -4,6 +4,7 @@ import com.marrios.api.dto.socialnetwork.CreateSocialNetworkDto;
 import com.marrios.api.exception.socialnetwork.SocialNetworkAlreadyExistsException;
 import com.marrios.api.model.SocialNetwork;
 import com.marrios.api.repository.SocialNetworkRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -25,10 +26,16 @@ public class SocialNetworkService {
                     dto.getSocialNetworkName()
             );
         }
-
         SocialNetwork socialNetwork = new SocialNetwork();
         socialNetwork.setSocialNetworkName(dto.getSocialNetworkName());
         socialNetwork.setLink(dto.getLink());
         return socialNetworkRepository.save(socialNetwork);
+    }
+
+    public boolean delete(Long id) {
+        SocialNetwork socialNetwork = socialNetworkRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("SocialNetwork não encontrada: " + id));
+        this.socialNetworkRepository.delete(socialNetwork);
+        return true;
     }
 }

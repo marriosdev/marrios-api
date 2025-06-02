@@ -11,4 +11,6 @@ import java.util.Optional;
 public interface SocialNetworkRepository extends JpaRepository<SocialNetwork, Long> {
     @Query("SELECT COUNT(s) > 0 FROM SocialNetwork s WHERE s.socialNetworkName = :name")
     boolean existsByName(@Param("name") String name);
+
+    Optional<SocialNetwork> findById(Long id);
 }

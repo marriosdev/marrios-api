@@ -2,6 +2,7 @@ package com.marrios.api.exception.handler;
 
 import com.marrios.api.exception.handler.dto.ValidateMessageErrorDto;
 import com.marrios.api.exception.socialnetwork.SocialNetworkAlreadyExistsException;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -48,5 +49,16 @@ public class GlobalExceptionHandler {
 
         response.setErrors(errorsList);
         return ResponseEntity.badRequest().body(response);
+    }
+
+    @ExceptionHandler(EntityNotFoundException.class)
+    public ResponseEntity<ExceptionResponse> handleEntityNotFoundException(EntityNotFoundException ex, WebRequest request) {
+        ExceptionResponse response = new ExceptionResponse();
+        response.setStatus(400);
+        response.setMessage(ex.getMessage());
+        response.setError("ENTITY_NOT_FOUND");
+        response.setTimestamp(LocalDateTime.now());
+        response.setPath(request.getDescription(false).replace("uri=", ""));
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
     }
 }
