@@ -12,16 +12,15 @@ import lombok.Setter;
 
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 public class ExceptionResponse implements Serializable{
     private static final long serialVersionUID = 1L;
 
-    private @Getter @Setter LocalDateTime timestamp;
-
-    private @Getter @Setter String error;
-
-    private @Getter @Setter Integer status;
-
-    private @Getter @Setter String message;
-
-    private @Getter @Setter List errors;
+    private LocalDateTime timestamp;
+    private String error;
+    private Integer status;
+    private String message;
+    private List errors;
+    private String path;
 }
