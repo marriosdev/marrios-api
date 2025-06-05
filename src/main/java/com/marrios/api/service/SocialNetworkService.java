@@ -3,6 +3,7 @@ package com.marrios.api.service;
 import com.marrios.api.dto.socialnetwork.CreateSocialNetworkDto;
 import com.marrios.api.dto.socialnetwork.UpdateSocialNetworkDto;
 import com.marrios.api.exception.socialnetwork.SocialNetworkAlreadyExistsException;
+import com.marrios.api.kafka.producer.socialnetwork.SocialNetworkProducer;
 import com.marrios.api.model.SocialNetwork;
 import com.marrios.api.repository.SocialNetworkRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -16,6 +17,9 @@ public class SocialNetworkService {
 
     @Autowired
     private SocialNetworkRepository socialNetworkRepository;
+
+    @Autowired
+    private SocialNetworkProducer socialNetworkProducer;
 
     public List<SocialNetwork> getAll()
     {
@@ -31,6 +35,11 @@ public class SocialNetworkService {
         SocialNetwork socialNetwork = new SocialNetwork();
         socialNetwork.setSocialNetworkName(dto.getSocialNetworkName());
         socialNetwork.setLink(dto.getLink());
+
+        // KAFKA MESSAGE
+        System.out.println("ENVIANDO MENSAGEM PARA O KAFKA");
+        this.socialNetworkProducer.createSocialNetworkMessage("Social Networok - Created: " + dto.getLink());
+
         return socialNetworkRepository.save(socialNetwork);
     }
 
