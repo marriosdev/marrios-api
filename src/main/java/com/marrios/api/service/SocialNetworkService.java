@@ -36,9 +36,9 @@ public class SocialNetworkService {
         socialNetwork.setSocialNetworkName(dto.getSocialNetworkName());
         socialNetwork.setLink(dto.getLink());
 
-        // KAFKA MESSAGE
+
         System.out.println("ENVIANDO MENSAGEM PARA O KAFKA");
-        this.socialNetworkProducer.createSocialNetworkMessage("Social Networok - Created: " + dto.getLink());
+        this.socialNetworkProducer.createSocialNetworkMessage("Social Network - Created: " + dto.getLink());
 
         return socialNetworkRepository.save(socialNetwork);
     }

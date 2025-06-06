@@ -5,9 +5,10 @@ services:
     build: .
     ports:
       - "8080:8080"
-    depends_on:
-      - db
-      - kafka
+    command: >
+      /wait-for-it.sh db:5432 -- 
+      /wait-for-it.sh kafka:9092 -- 
+      java -jar app.jar
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/pgsql
       SPRING_DATASOURCE_USERNAME: postgres_user
