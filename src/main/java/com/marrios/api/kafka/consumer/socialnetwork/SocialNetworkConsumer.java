@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 public class SocialNetworkConsumer {
     @KafkaListener(topics = "topico-dev", groupId = "grupo-dev")
     public void createSocialNetworkListener(String mensagem) {
-        System.out.println("Recebido PELO DEV: " + mensagem);
+        System.out.println("Recebido PELO DEV TESTE UPDATE: " + mensagem);
     }
 
     @KafkaListener(topics = "topico-dev", groupId = "grupo-hehe")
